@@ -56,33 +56,33 @@ jobs:
         run: |
           docker run --rm --entrypoint="" ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:main pytest tests/test_cli_interface.py
 
-  build-singularity:
-    needs: build-docker
-    runs-on: ubuntu-latest
-    permissions:
-      contents: read
-      packages: read
-    steps:
-      - uses: actions/checkout@v4
+  # build-singularity:
+  #   needs: build-docker
+  #   runs-on: ubuntu-latest
+  #   permissions:
+  #     contents: read
+  #     packages: read
+  #   steps:
+  #     - uses: actions/checkout@v4
 
-      - name: Set lowercase image name
-        run: |
-          RAW_NAME="${{ env.DOCKERHUB_USERNAME }}/${GITHUB_REPOSITORY#*/}"
-          echo "IMAGE_NAME=${RAW_NAME,,}" >> "$GITHUB_ENV"
+  #     - name: Set lowercase image name
+  #       run: |
+  #         RAW_NAME="${{ env.DOCKERHUB_USERNAME }}/${GITHUB_REPOSITORY#*/}"
+  #         echo "IMAGE_NAME=${RAW_NAME,,}" >> "$GITHUB_ENV"
 
-      - name: Setup Apptainer/Singularity
-        uses: eWaterCycle/setup-apptainer@v2
-        with:
-          apptainer-version: 1.2.2
+  #     - name: Setup Apptainer/Singularity
+  #       uses: eWaterCycle/setup-apptainer@v2
+  #       with:
+  #         apptainer-version: 1.2.2
 
-      - name: Login to GHCR for Apptainer
-        run: |
-          apptainer remote login \
-            --username "${{ github.actor }}" \
-            --password "${{ secrets.GITHUB_TOKEN }}" \
-            docker://ghcr.io
+  #     - name: Login to GHCR for Apptainer
+  #       run: |
+  #         apptainer remote login \
+  #           --username "${{ github.actor }}" \
+  #           --password "${{ secrets.GITHUB_TOKEN }}" \
+  #           docker://ghcr.io
 
-      - name: Build Singularity Image
-        run: |
-          IMAGE_URL="docker://${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:main"
-          apptainer build micaflow.sif "$IMAGE_URL"
+  #     - name: Build Singularity Image
+  #       run: |
+  #         IMAGE_URL="docker://${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:main"
+  #         apptainer build micaflow.sif "$IMAGE_URL"
