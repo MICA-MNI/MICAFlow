@@ -15,7 +15,7 @@ MICAFlow is a comprehensive neuroimaging pipeline designed for processing struct
 
 ## Overview
 
-MICAFlow provides a robust and flexible framework for neuroimaging processing. By chaining together deep learning-based segmentation and advanced numerical solutions, it generates precise outputs even for modalities with low signal-to-noise ratio or strong geometric distortions.
+MICAFlow provides a robust and flexible framework for neuroimaging processing. By chaining together deep learning-based segmentation and advanced numerical solutions, it generates precise outputs even for modalities with low signal-to-noise ratio or strong geometric distortions. We also utilize a strong multimodal registration, available as an independent pip-installable package ([LAMAReg](https://github.com/MICA-MNI/LAMAReg)).
 
 ## Features
 
