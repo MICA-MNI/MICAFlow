@@ -1,0 +1,8 @@
+{
+    "Name": "MICAFlow Derivatives",
+    "BIDSVersion": "1.8.0",
+    "DatasetType": "derivative",
+    "PipelineDescription": {
+        "Name": "MICAFlow"
+    }
+}
